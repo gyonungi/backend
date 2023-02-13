@@ -1,5 +1,7 @@
 const http = require('http');
 const getUsers = require('./modules/users')
+const getBooks = require('./modules/library')
+const addBooksLibrary = require("./modules/addBooksLibrary");
 
 const hostName = "http://127.0.0.1";
 
@@ -7,6 +9,7 @@ const hostName = "http://127.0.0.1";
 const server = http.createServer((request, response) => {
     const url = new URL(request.url, hostName);
     const userName = url.searchParams.get("name");
+    const bookId = url.searchParams.get("id");
 
     if (userName) {
         response.status = 200;
@@ -15,6 +18,14 @@ const server = http.createServer((request, response) => {
         response.write(`Hello ${userName}!`);
         response.end();
         return;
+      }
+
+      if (bookId) {
+        response.status = 200;
+        response.statusMessage = "OK";
+        response.header= "Content-Type: application/json"
+        response.end(addBooksLibrary(bookId));
+        return
       }
 
       switch (request.url) {
@@ -43,6 +54,14 @@ const server = http.createServer((request, response) => {
             response.write(getUsers());
             response.end();
             break;
+
+            case "/?books":
+                response.status = 200;
+                response.statusMessage = "OK";
+                response.header = "Content-Type: application/json"
+                response.write(getBooks());
+                response.end();
+                break;
 
     default:
         response.status = 500;

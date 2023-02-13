@@ -1,0 +1,17 @@
+[
+    { "id": "1",
+      "author": "Nicholas Sparks",
+      "title": "The Notebook",
+      "year": 1996
+    },
+    { "id": "2",
+      "author": "Somerset Maugham",
+      "title": "Theatre",
+      "year": 1937
+    },
+    { "id": "3",
+      "author": "Daniel Foe",
+      "title": "Robinson Crusoe",
+      "year": 1840
+    }
+  ]
